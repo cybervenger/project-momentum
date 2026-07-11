@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Momentum — Strength, built quietly.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Archivo:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0A0A0B;
+  --char:#111113;
+  --bone:#EDEAE3;
+  --dim:#8C8A84;
+  --ember:#C4B49A; /* warm muted bronze */
+  --hair:rgba(237,234,227,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--bone);font-family:'Archivo',sans-serif;font-weight:300;font-size:15px;line-height:1.75;letter-spacing:.01em}
+::selection{background:var(--ember);color:var(--black)}
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;font-weight:300;line-height:1.12}
+.mono{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:var(--dim)}
+a{color:inherit;text-decoration:none}
+img,video{display:block;max-width:100%}
+a:focus-visible,button:focus-visible{outline:1px solid var(--ember);outline-offset:4px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:28px 40px;mix-blend-mode:difference}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.05rem;letter-spacing:.28em;text-transform:uppercase;font-weight:400}
+.nav-r{display:flex;gap:34px;align-items:center}
+.nav-r a{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bone);opacity:.75;transition:opacity .3s}
+.nav-r a:hover{opacity:1}
+
+/* Shared full-viewport panel */
+.panel{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;padding:120px 24px}
+.panel-media{position:absolute;inset:0;overflow:hidden;background:var(--char)}
+.panel-media::after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(10,10,11,.42),rgba(10,10,11,.62))}
+.media-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:
+ radial-gradient(70% 55% at 50% 40%, #1d1c1a 0%, #0f0f10 70%);color:rgba(237,234,227,.22);font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;text-align:center;padding:20px}
+.panel-inner{position:relative;z-index:2;text-align:center;max-width:760px}
+
+/* HERO */
+.hero h1{font-size:clamp(2.8rem,7.4vw,5.6rem);font-style:italic}
+.hero .loc{margin-bottom:26px}
+.scroll-cue{position:absolute;bottom:38px;left:50%;transform:translateX(-50%);z-index:2}
+.scroll-cue::before{content:'';display:block;width:1px;height:46px;background:var(--bone);opacity:.5;margin:0 auto 14px;animation:drop 2.6s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* MANIFESTO (plain text panel) */
+.quiet{padding:170px 24px;display:flex;justify-content:center}
+.quiet-inner{max-width:640px;text-align:center}
+.quiet h2{font-size:clamp(1.9rem,4.2vw,3rem);margin:26px 0 30px}
+.quiet p{color:var(--dim);max-width:520px;margin:0 auto 20px}
+.rule{width:36px;height:1px;background:var(--ember);margin:0 auto}
+
+/* ALTERNATING media + text rows */
+.row{display:grid;grid-template-columns:1fr 1fr;min-height:88vh}
+.row .media{position:relative;overflow:hidden;background:var(--char)}
+.row .copy{display:flex;flex-direction:column;justify-content:center;padding:90px 8vw}
+.row .copy h3{font-size:clamp(1.7rem,3.2vw,2.5rem);margin:22px 0 24px;font-style:italic}
+.row .copy p{color:var(--dim);max-width:420px;margin-bottom:16px}
+.row.flip .media{order:2}
+.row .copy .mono{color:var(--ember)}
+
+/* PROGRAMS */
+.programs{padding:170px 24px;border-top:1px solid var(--hair)}
+.programs-head{text-align:center;max-width:620px;margin:0 auto 110px}
+.programs-head h2{font-size:clamp(2rem,4.5vw,3.2rem);margin-top:26px;font-style:italic}
+.tiers{max-width:880px;margin:0 auto}
+.tier{display:grid;grid-template-columns:1fr 2fr 1fr;gap:30px;align-items:baseline;padding:44px 0;border-top:1px solid var(--hair);transition:opacity .3s}
+.tier:last-child{border-bottom:1px solid var(--hair)}
+.tier h3{font-size:1.7rem;font-style:italic}
+.tier .desc{color:var(--dim);font-size:.9rem;max-width:420px}
+.tier .price{text-align:right}
+.tier .price .amt{font-family:'Cormorant Garamond',serif;font-size:1.5rem}
+.tier .price .per{display:block;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:4px}
+.tier .go{display:inline-block;margin-top:14px;font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ember);border-bottom:1px solid transparent;transition:border-color .3s}
+.tier .go:hover{border-color:var(--ember)}
+
+/* COACH */
+.coach{border-top:1px solid var(--hair)}
+.coach .copy .sig{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--ember);margin-top:26px}
+
+/* TESTIMONIAL */
+.testimonial{padding:180px 24px;text-align:center;border-top:1px solid var(--hair)}
+.testimonial blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.6rem);max-width:820px;margin:34px auto;line-height:1.35}
+.testimonial cite{font-style:normal;font-family:'Archivo',sans-serif;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+
+/* CTA */
+.cta{min-height:92vh}
+.cta h2{font-size:clamp(2.4rem,6vw,4.6rem);font-style:italic;margin:26px 0 34px}
+.cta-btn{display:inline-block;font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;padding:20px 46px;border:1px solid var(--bone);transition:background .35s,color .35s}
+.cta-btn:hover{background:var(--bone);color:var(--black)}
+
+footer{padding:44px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;border-top:1px solid var(--hair)}
+footer span{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+@media (max-width:840px){
+  nav{padding:22px 20px}
+  .nav-r a:not(:last-child){display:none}
+  .row{grid-template-columns:1fr;min-height:0}
+  .row .media{min-height:56vh;order:0!important}
+  .row .copy{padding:70px 24px}
+  .tier{grid-template-columns:1fr;gap:10px;padding:36px 0}
+  .tier .price{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#top">Momentum</a>
+  <div class="nav-r">
+    <a href="#method">Method</a>
+    <a href="#programs">Programs</a>
+    <a href="#coach">Coach</a>
+    <a href="#begin">Begin</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="panel hero" id="top">
+  <div class="panel-media">
+    <!-- Replace this div with: <video autoplay muted loop playsinline src="hero.mp4"></video> -->
+    <div class="media-placeholder">[ Full-screen video — slow-motion training footage,<br>early morning light, no music-video cuts ]</div>
+  </div>
+  <div class="panel-inner">
+    <div class="mono loc reveal">Delhi&nbsp;·&nbsp;Training &amp; Nutrition</div>
+    <h1 class="reveal">Where progress<br>becomes quiet.</h1>
+  </div>
+  <div class="scroll-cue mono">Scroll to begin</div>
+</header>
+
+<!-- MANIFESTO -->
+<section class="quiet">
+  <div class="quiet-inner reveal">
+    <div class="mono">The idea</div>
+    <h2>Built less like a diet.<br>More like a practice.</h2>
+    <p>Project Momentum is one coach, a small number of clients, and a single method — structured training and nutrition built around the food already in your kitchen and the hours already in your day.</p>
+    <p>No transformations screamed in capital letters. No twenty-one-day promises. Just work, tracked honestly, week after week — until the results stop being surprising.</p>
+    <div class="rule" style="margin-top:36px"></div>
+  </div>
+</section>
+
+<!-- METHOD ROWS -->
+<div id="method">
+  <section class="row">
+    <div class="media">
+      <div class="media-placeholder">[ Photo — a plate of ordinary Indian food,<br>shot like still life. Dal, roti, sabzi. ]</div>
+    </div>
+    <div class="copy">
+      <div class="mono reveal">Nutrition</div>
+      <h3 class="reveal">Eat what your house already cooks.</h3>
+      <p class="reveal">Every plan is written around Indian food — roti, rice, dal, paneer, eggs. Portions and timing change. Your kitchen doesn't.</p>
+      <p class="reveal">No imported meal plans. No chicken-and-broccoli guilt. The best diet is the one your life can actually hold.</p>
+    </div>
+  </section>
+
+  <section class="row flip">
+    <div class="media">
+      <div class="media-placeholder">[ Photo — chalk, a loaded barbell, hands.<br>Detail shots, not gym-mirror selfies. ]</div>
+    </div>
+    <div class="copy">
+      <div class="mono reveal">Training</div>
+      <h3 class="reveal">Three good days beat six loud ones.</h3>
+      <p class="reveal">Programs are built for real schedules — three to four sessions a week, gym or home, every set written down before you walk in.</p>
+      <p class="reveal">Strength first. Conditioning second. Nothing performed for a camera.</p>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="media">
+      <div class="media-placeholder">[ Photo — a notebook or tracking sheet,<br>numbers in pencil. The quiet part. ]</div>
+    </div>
+    <div class="copy">
+      <div class="mono reveal">Tracking</div>
+      <h3 class="reveal">The scale lies daily. Trends don't.</h3>
+      <p class="reveal">Weight, measurements, lifts and adherence — logged weekly, reviewed together. Plateaus get caught early and plans get corrected quietly.</p>
+      <p class="reveal">Progress here is a line on a chart, not a feeling on a Monday.</p>
+    </div>
+  </section>
+</div>
+
+<!-- PROGRAMS -->
+<section class="programs" id="programs">
+  <div class="programs-head reveal">
+    <div class="mono">Programs</div>
+    <h2>Three ways in.<br>One standard of work.</h2>
+  </div>
+  <div class="tiers">
+    <div class="tier reveal">
+      <h3>The Blueprint</h3>
+      <div class="desc">A complete four-week training and nutrition plan, written for your goal and delivered once. For those who only need the map.
+        <br><a class="go" href="#begin">Request the plan</a></div>
+      <div class="price"><span class="amt">₹499</span><span class="per">One time</span></div>
+    </div>
+    <div class="tier reveal">
+      <h3>The Practice</h3>
+      <div class="desc">The plan, plus the coach — weekly check-ins, form reviews, and adjustments as your body changes. This is where most people belong.
+        <br><a class="go" href="#begin">Join the practice</a></div>
+      <div class="price"><span class="amt">₹1,999</span><span class="per">Per month</span></div>
+    </div>
+    <div class="tier reveal">
+      <h3>Private Coaching</h3>
+      <div class="desc">Fully personal. Direct access, weekly calls, daily accountability. Taken on in small numbers, by application only.
+        <br><a class="go" href="#begin">Apply for a seat</a></div>
+      <div class="price"><span class="amt">₹9,999</span><span class="per">Per month · Limited</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- COACH -->
+<section class="row coach" id="coach">
+  <div class="media">
+    <div class="media-placeholder">[ Portrait — the coach, natural light,<br>looking at camera. One honest photo. ]</div>
+  </div>
+  <div class="copy">
+    <div class="mono reveal">The Coach</div>
+    <h3 class="reveal">Years on the gym floor.<br>Now in your corner.</h3>
+    <p class="reveal">Before Momentum existed online, its coach spent years doing one thing — personal training, in person, with everyday people. Office workers. Students. Beginners who'd failed before.</p>
+    <p class="reveal">Everything in these programs comes from that floor: what holds up when clients have jobs, families and tiffins — and what quietly falls apart by week three.</p>
+    <div class="sig reveal">— Head Coach, Project Momentum</div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <div class="mono reveal">From a client</div>
+  <blockquote class="reveal">"I had started and quit five times before this. It's the first plan that was built from food my mother already cooks — and the first coach who checked whether I actually followed it."</blockquote>
+  <cite class="reveal">Placeholder — replace with a real client &nbsp;·&nbsp; Delhi</cite>
+</section>
+
+<!-- CTA -->
+<section class="panel cta" id="begin">
+  <div class="panel-media">
+    <div class="media-placeholder">[ Video or photo — end of a session. Sweat,<br>stillness, early light through a window. ]</div>
+  </div>
+  <div class="panel-inner reveal">
+    <div class="mono">Begin</div>
+    <h2>The work is waiting.</h2>
+    <a class="cta-btn" href="https://wa.me/910000000000">Message us on WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <span>Project Momentum · MMXXVI</span>
+  <span>Instagram — @try.momentum</span>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.18});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
